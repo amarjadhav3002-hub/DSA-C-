@@ -1,0 +1,141 @@
+\documentclass[12pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx} 
+\usepackage{hyperref} 
+\usepackage{geometry}
+\usepackage{enumitem}
+\usepackage{amsmath} 
+\usepackage{tikz}
+
+\geometry{margin=1in}
+
+
+\title{\textbf{A Formal Verification Approach to Real-Time Adaptive Traffic Signal Control}}
+\author{\textbf{Pathade Ajay (25111042), Amar Jadhav (25112040)} \\ \textbf{Department of Computer Science, Savitribai Phule Pune University}}
+\date{}
+
+
+\renewcommand{\abstractname}{\large\bfseries Abstract}
+
+\begin{document}
+	
+	\maketitle
+	
+	\begin{abstract}
+		Urban traffic management faces challenges of congestion, delays, and safety risks due to rapid urbanization and increasing vehicle density. Traditional fixed or density-based traffic signal systems cannot adapt efficiently to dynamic traffic patterns and do not provide safety guarantees. Adaptive systems, such as RHODES, improve real-time control but rely on empirical models without mathematical proof of safety. This research integrates formal verification methods with real-time adaptive traffic control, ensuring provably safe, error-free signal operation while maintaining optimized traffic flow.
+	\end{abstract}
+	
+	\section*{Keywords}
+	Adaptive Traffic Control, RHODES, Formal Methods, Model Checking, Urban Mobility, Safety Assurance
+	
+	\section{Introduction}
+	Urban traffic management has become increasingly challenging due to rapid urbanization, growing vehicle density, and limited infrastructure. Congestion leads to delays, higher accident rates, and increased fuel consumption. Emergency vehicles such as ambulances and fire trucks often face critical delays in high-density traffic.
+	
+	Traditional traffic control systems, including fixed-time and simple density-based signals, are limited in adapting to dynamic traffic conditions. Early adaptive systems used microcontrollers and IR sensors to adjust signal timings. While they improved traffic flow and allowed emergency prioritization, they lacked formal verification to ensure safety under all circumstances.
+	
+	Modern adaptive systems like RHODES employ predictive, hierarchical algorithms using rolling time horizons and platoon-based modeling. IoT-enabled traffic management further improves capabilities with sensors, cameras, V2V/V2I communication, and RFID tracking. These systems dynamically adjust signals and provide real-time information. However, they rely on empirical data and software logic without formal proof of safety.
+	
+	This research proposes integrating formal verification methods with adaptive traffic control to ensure that no two conflicting signals are active simultaneously, emergency vehicles receive priority, and traffic flow is optimized under all conditions.
+	
+	\section{Main Body}
+	
+	\subsection{Early and Modern Adaptive Traffic Control Systems}
+	
+	\textbf{Early Systems:}
+	\begin{itemize}
+		\item Microcontroller-based systems with IR sensors to detect traffic density.
+		\item Dynamically adjusted green-light durations.
+		\item Emergency vehicle priority via manual overrides.
+		\item Limitation: Lacked formal verification, allowing unsafe signal conflicts.
+	\end{itemize}
+	
+	\textbf{Modern Adaptive IoT-Based Systems:}
+	\begin{itemize}
+		\item Integration of V2V and V2I communication enables real-time data sharing.
+		\item IoT sensors, cameras, and RFID tracking improve detection and emergency prioritization.
+		\item Intelligent algorithms adjust signals dynamically and predict congestion.
+		\item Limitation: Susceptible to sensor failure, network delay, and software bugs; no formal proof ensures safety.
+		\item \textbf{Example Diagram: IoT Sensor Integration:}
+		\begin{figure}[h]
+			\centering
+			\begin{tikzpicture}[every node/.style={draw, rounded corners, align=center}]
+				% Nodes
+				\node (intersection) [fill=blue!20] {Traffic Intersection};
+			\usetikzlibrary{positioning} % Add this in the preamble
+			
+			% Inside the figure:
+			\node (intersection) [fill=blue!20] {Traffic Intersection};
+			\node (sensor1) [above left=2cm and 2cm of intersection, fill=green!20] {IoT Sensor 1};
+			\node (sensor2) [above right=2cm and 2cm of intersection, fill=green!20] {IoT Sensor 2};
+			\node (camera) [below left=2cm and 2cm of intersection, fill=yellow!20] {Camera};
+			\node (rfid) [below right=2cm and 2cm of intersection, fill=orange!20] {RFID Reader};
+			\node (controller) [below=4cm of intersection, fill=red!20] {Adaptive Controller};
+			
+				% Connections
+				\draw[->, thick] (sensor1) -- (intersection);
+				\draw[->, thick] (sensor2) -- (intersection);
+				\draw[->, thick] (camera) -- (intersection);
+				\draw[->, thick] (rfid) -- (intersection);
+				\draw[->, thick, dashed] (intersection) -- (controller) node[midway,right] {Data Stream};
+				\draw[->, thick, dashed] (controller) -- (intersection) node[midway,left] {Control Signal};
+			\end{tikzpicture}
+			\caption{IoT Sensor and Controller Integration for Traffic Management}
+		\end{figure}
+	\end{itemize}
+	
+	\subsection{RHODES Adaptive Control System}
+	\begin{itemize}
+		\item Hierarchical and predictive approach with rolling time horizons and platoon-based modeling.
+		\item Reduces waiting times, improves emergency response, and shows proven improvements in simulations.
+		\item Limitation: Relies on empirical predictive models; no formal safety proof.
+	\end{itemize}
+	
+	\section{Challenges and Future Perspectives}
+	
+	\subsection{Heterogeneous Data Integration}
+	\begin{itemize}
+		\item TMS must integrate data from multiple sources: sensors, cameras, V2V/V2I devices, IoT platforms.
+		\item Challenges: lack of standardization, managing numerous IoT devices, securing private data.
+	\end{itemize}
+	
+	\subsection{Data Management and Big Data Issues}
+	\begin{itemize}
+		\item Handle large volumes of heterogeneous and asynchronous data.
+		\item Challenges: standardization, data correlation, aggregation, and real-time decision-making.
+	\end{itemize}
+	
+	\subsection{Future Perspectives}
+	\begin{itemize}
+		\item Scalability to multi-intersection and city-wide networks.
+		\item Advanced sensing: LIDAR, cameras, video analytics, machine learning.
+		\item Resilience to sensor, network, and software failures.
+		\item Energy efficiency and integration with urban traffic policies.
+	\end{itemize}
+	
+	\section{Conclusion}
+	\begin{itemize}
+		\item Adaptive traffic and IoT-based systems improve efficiency and emergency vehicle prioritization.
+		\item Empirical optimization alone cannot guarantee safety.
+		\item Formal verification ensures provably safe operations within stated assumptions:
+		\begin{itemize}
+			\item Mutual exclusion of green lights.
+			\item Emergency vehicle prioritization.
+			\item Optimized traffic flow under all conditions.
+		\end{itemize}
+		\item Verified adaptive systems provide a reliable foundation for future urban traffic management.
+	\end{itemize}
+	
+	\section{References}
+	\begin{enumerate}
+	
+		
+		\item P. B. Mirchandani and C. W. Head, ``A real-time traffic adaptive signal control system: RHODES,'' \textit{Transportation Research Record}, no. 1634, pp. 122–128, 1998.
+		
+		\item B. Thamilselvam, M. K. Muthuramalingam, and K. Suresh, ``Coordinated Intelligent Traffic Lights using UPPAAL Stratego,'' \textit{International Journal of Computer Applications}, vol. 183, no. 35, pp. 25–30, 2021.
+		
+		\item T. Kamput, ``Formal Modelling and Verification of the Traffic Light Control System Design with Timed Automata,'' \textit{International Journal of Advanced Computer Science and Applications (IJACSA)}, vol. 14, no. 3, pp. 450–457, 2023.
+		
+	\end{enumerate}
+	
+\end{document}
+
